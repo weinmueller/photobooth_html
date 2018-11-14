@@ -6,11 +6,12 @@
 
 /* Make the image responsive */
 .container img {
-  width: 100%;
-  height: auto;
+  height: 100%;
+  width: auto;
 }
 
 /* Style the button and place it in the middle of the container/image */
+/* For the MIDDLE button */
 .container .btn {
   position: absolute;
   top: 50%;
@@ -24,8 +25,53 @@
   border: none;
   cursor: pointer;
   border-radius: 1vw;
+  outline-style: none; /* blauer rahmen verschwindet */
 }
 
 .container .btn:hover {
+  background-color: black;
+}
+
+/* Style the button and place it in the middle of the container/image */
+/* For the Bottom button left */
+.container .btn2 {
+  position: absolute;
+  top: 85%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 5vw;
+  padding: 1vw 2vw;
+  border: none;
+  cursor: pointer;
+  border-radius: 1vw;
+  outline-style: none; /* blauer rahmen verschwindet */
+}
+
+.container .btn2:hover {
+  background-color: black;
+}
+
+/* Style the button and place it in the middle of the container/image */
+/* For the Bottom button right */
+.container .btn3 {
+  position: absolute;
+  top: 85%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 5vw;
+  padding: 1vw 2vw;
+  border: none;
+  cursor: pointer;
+  border-radius: 1vw;
+  outline-style: none; /* blauer rahmen verschwindet */
+}
+
+.container .btn3:hover {
   background-color: black;
 }

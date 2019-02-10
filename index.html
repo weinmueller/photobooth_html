@@ -4,7 +4,7 @@
 </head>
 
 <div class="container">
-  <img src="background/hintergrund.jpg" alt="Snow">
+  <img id="background" src="background/hintergrund.jpg" z-index=0;>
 
   <!-- Buttons middle center -->
   <input id="btn_middle" class="btn" type="button" value="Start"
@@ -14,13 +14,33 @@
   <input id="btn_left" class="btn2" type="button" value="Neuer Versuch!"
      onclick="ready()" style="visibility: hidden;">
   <input id="btn_right" class="btn3" type="button" value="Nächstes Foto!"
-     onclick="ready()" style="visibility: hidden;">
+     onclick="addToList()" style="visibility: hidden;">
+
 </div>
+
+<div class="oben">
+  <!-- Picture for preview -->
+  <img id="previewPic" z-index=1; style="visibility: hidden;">
+
+  <p id="demo"></p>
+
+  <canvas id="myCanvas" width="240" height="297" z-index=2;
+    style="border:1px solid #d3d3d3; visibility: hidden; background-color:#808080;" >
+  </canvas>
+
+</div>
+
 
 <!-- JavaScript part for the button -->
 <script type="text/javascript">
 
+  var seconds = 6; // Total seconds to wait
+  var previewPic_adresse = "pictures/test.jpg"; // Neue scr überschreiben
+
+  var pic_list = [];
+
     function ready() {
+        document.getElementById("previewPic").style.visibility = "hidden";
         document.getElementById("btn_middle").style.visibility = "visible";
         document.getElementById("btn_right").style.visibility = "hidden";
         document.getElementById("btn_left").style.visibility = "hidden";
@@ -33,14 +53,51 @@
         document.getElementById("btn_middle").style.visibility = "hidden";
         document.getElementById("btn_right").style.visibility = "visible";
         document.getElementById("btn_left").style.visibility = "visible";
+
+        // Picture preview
+        document.getElementById("previewPic").src = previewPic_adresse; // Neue scr überschreiben
+        document.getElementById("previewPic").style.visibility = "visible";
     }
 
+    function addToList() {
+        pic_list.push(previewPic_adresse); // Fügt Bild hinzu
 
-    var seconds = 6; // Total seconds to wait
+        document.getElementById("demo").innerHTML = pic_list.join(" * ");
+
+        if ( pic_list.length == 1) { // Ändern nicht vergessen
+          createCollage();
+        }
+        else {
+          ready();
+        }
+      }
+
+    function createCollage() {
+        //alert(0.8*document.getElementById("background").width);
+        document.getElementById("previewPic").style.visibility = "hidden";
+
+        var xx = document.getElementById("previewPic").width;
+        var yy = document.getElementById("previewPic").height;
+
+        document.getElementById("myCanvas").width = xx;
+        document.getElementById("myCanvas").height = yy;
+
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var img = document.getElementById("previewPic");
+        ctx.drawImage(img, 0.01*xx, 0.01*yy,0.48*xx,0.48*yy); // (0,0) (x,y)
+        ctx.drawImage(img, 0.51*xx, 0.01*yy,0.48*xx,0.48*yy);
+        ctx.drawImage(img, 0.01*xx, 0.51*yy,0.48*xx,0.48*yy);
+        ctx.drawImage(img, 0.51*xx, 0.51*yy,0.48*xx,0.48*yy);
+
+        document.getElementById("myCanvas").style.visibility = "visible";
+      }
+
+
 
     function countdown() {
 
-        seconds = seconds - 1;
+        seconds = seconds - 1; // Deswegen 6 sec
         if (seconds < 1) {
            seconds = 6;
             // After countdown

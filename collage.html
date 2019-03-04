@@ -1,0 +1,33 @@
+<html>
+ <body onload="draw();">
+   <canvas id="canvas" width="400" height="200"></canvas>
+   
+   <a id="downloadLnk" download="YourFileName.jpg">Drucken</a>
+ </body>
+  
+  <script>
+  
+  function download() {
+    var dt = canvas.toDataURL('image/jpeg');
+    this.href = dt;
+};
+
+downloadLnk.addEventListener('click', download, false);
+  
+  function draw() {
+  var ctx = document.getElementById('canvas').getContext('2d');
+  var img = new Image();
+  img.onload = function() {
+    for (var i = 0; i < 2; i++) {
+      for (var j = 0; j < 2; j++) {
+        ctx.drawImage(img, j * 210, i * 110, 200, 100);
+      }
+    }
+  };
+  img.src = "index.jpg";
+    }
+    
+//downloadLnk.click();
+
+</script>
+</html>

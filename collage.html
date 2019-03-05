@@ -1,19 +1,19 @@
 <html>
  <body onload="draw();">
    <canvas id="canvas" width="400" height="200"></canvas>
-   
+
    <a id="downloadLnk" download="YourFileName.jpg">Drucken</a>
  </body>
-  
+
   <script>
-  
+
   function download() {
     var dt = canvas.toDataURL('image/jpeg');
     this.href = dt;
 };
 
 downloadLnk.addEventListener('click', download, false);
-  
+
   function draw() {
   var ctx = document.getElementById('canvas').getContext('2d');
   var img = new Image();
@@ -24,9 +24,9 @@ downloadLnk.addEventListener('click', download, false);
       }
     }
   };
-  img.src = "index.jpg";
+  img.src = "pictures/test.jpg";
     }
-    
+
 //downloadLnk.click();
 
 </script>

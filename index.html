@@ -45,12 +45,22 @@
         document.getElementById("btn_right").style.visibility = "hidden";
         document.getElementById("btn_left").style.visibility = "hidden";
 
+        document.getElementById("myCanvas").style.visibility = "hidden";
+
         document.getElementById("btn_middle").value = "Bei Klick geht es los.";
         document.getElementById("btn_middle").onclick = function () { countdown(); };
     }
 
     function preview() {
         document.getElementById("btn_middle").style.visibility = "hidden";
+
+        if ( pic_list.length == 1){
+          document.getElementById("btn_right").value = "Collage";
+        }
+        else {
+          document.getElementById("btn_right").value = "Nächstes Foto!";
+          }
+        document.getElementById("btn_left").value = "Neuer Versuch!";
         document.getElementById("btn_right").style.visibility = "visible";
         document.getElementById("btn_left").style.visibility = "visible";
 
@@ -64,7 +74,7 @@
 
         document.getElementById("demo").innerHTML = pic_list.join(" * ");
 
-        if ( pic_list.length == 1) { // Ändern nicht vergessen
+        if ( pic_list.length == 2) { // Ändern nicht vergessen
           createCollage();
         }
         else {
@@ -91,6 +101,9 @@
         ctx.drawImage(img, 0.51*xx, 0.51*yy,0.48*xx,0.48*yy);
 
         document.getElementById("myCanvas").style.visibility = "visible";
+
+        document.getElementById("btn_right").value = "Drucken";
+        document.getElementById("btn_left").value = "Löschen";
       }
 
 

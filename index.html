@@ -21,15 +21,13 @@
 <div class="oben">
   <!-- Picture for preview -->
   <img id="previewPic" z-index=1; style="visibility: hidden;">
-
-  <p id="demo"></p>
-
+  
   <canvas id="myCanvas" width="240" height="297" z-index=2;
     style="border:1px solid #d3d3d3; visibility: hidden; background-color:#808080;" >
   </canvas>
-
 </div>
 
+<a id="downloadLnk" download="YourFileName.jpg">Drucken</a>
 
 <!-- JavaScript part for the button -->
 <script type="text/javascript">
@@ -38,7 +36,7 @@
   var previewPic_adresse = "pictures/test.jpg"; // Neue scr überschreiben
 
   var pic_list = [];
-
+  
     function ready() {
         document.getElementById("previewPic").style.visibility = "hidden";
         document.getElementById("btn_middle").style.visibility = "visible";
@@ -72,8 +70,6 @@
     function addToList() {
         pic_list.push(previewPic_adresse); // Fügt Bild hinzu
 
-        document.getElementById("demo").innerHTML = pic_list.join(" * ");
-
         if ( pic_list.length == 2) { // Ändern nicht vergessen
           createCollage();
         }
@@ -104,10 +100,26 @@
 
         document.getElementById("btn_right").value = "Drucken";
         document.getElementById("btn_left").value = "Löschen";
-      }
-
-
-
+        
+        document.getElementById("btn_right").onclick = function () { print() };
+    }
+    
+    function print() {
+        downloadLnk.click();    
+        
+        // hier drucken
+        
+        ready();
+    }
+    
+    function download() {
+        var c = document.getElementById("myCanvas");
+        var dt = c.toDataURL('image/jpeg');
+        this.href = dt;
+    }
+      
+    downloadLnk.addEventListener('click', download, false);
+      
     function countdown() {
 
         seconds = seconds - 1; // Deswegen 6 sec
